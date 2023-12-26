@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="cache-control"
+      content="no-store, no-cache, must-revalidate"
+    />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="loginStyle.css" />
+    <title>login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="welcome">
+        <h1 style="text-align: center">BlitzBrain</h1>
+      </div>
+      <form action="/login" method="post">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+        />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+        />
+        <div class="button-container">
+          <button type="submit">Login</button>
+          <button type="button" onclick="clearFields()">Clear</button>
+        </div>
+      </form>
+      <p id="welcome-message"></p>
+    </div>
+    <script>
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+    </script>
+
+    <script>
+      function clearFields() {
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+      }
+    </script>
+  </body>
+</html>

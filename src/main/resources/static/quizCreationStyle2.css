@@ -1,0 +1,222 @@
+@font-face {
+  font-family: "Rocher";
+  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+}
+
+@font-palette-values --Grays {
+  font-family: Rocher;
+  base-palette: 8;
+}
+
+body {
+  text-align: center;
+  font-size: 70px;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+  background: linear-gradient(to bottom, #0f9b0f, #000000);
+}
+
+.container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+  background: linear-gradient(to bottom, #0f9b0f, #000000);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.question-input {
+  width: 80%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #141414;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  border: 2px solid #555;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  position: relative;
+}
+.question-input:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid #555;
+  pointer-events: none;
+}
+
+.question-input:hover:before {
+  border: 2px solid #27e90d;
+}
+
+.question-input:focus:before {
+  border: 2px solid #27e90d;
+  box-shadow: 0 0 5px rgba(39, 233, 13, 0.5);
+}
+
+.choices-container {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  border: 2px solid #4caf4f2d;
+  border-radius: 10px;
+  padding: 20px 10px 10px 0px;
+}
+
+.choice-input {
+  width: calc(50% - 40px);
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #141414;
+  font-size: 20px;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.choice-input:hover {
+  border: 1px solid #27e90d;
+}
+
+
+.next-button {
+  margin-left: 15px;
+  padding: 10px; 
+  font-family: Rocher;
+  font-size: 30px; 
+  cursor: pointer;
+  background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
+  background: linear-gradient(to bottom, #3652f4, #000000);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#2aa13e 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
+}
+
+.back-button {
+  margin-right: 15px;
+  padding: 10px; 
+  font-family: Rocher;
+  font-size: 30px;
+  cursor: pointer;
+  background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
+  background: linear-gradient(to bottom, #3652f4, #000000);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#2aa13e 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
+}
+
+.back-button:hover {
+  --_p: 100%;
+  transition: background-position 0.4s, background-size 0s;
+}
+
+.next-button:hover {
+  --_p: 100%;
+  transition: background-position 0.4s, background-size 0s;
+}
+
+.back-button:active {
+  box-shadow: 0 0 9e9Q inset #0009;
+  background-color: var(--c);
+  color: #fff;
+}
+
+.next-button:active {
+  box-shadow: 0 0 9e9Q inset #0009;
+  background-color: var(--c);
+  color: #fff;
+}
+
+button {
+  margin-right: 15px;
+  padding: 10px; 
+  font-family: Rocher;
+  font-size: 30px; 
+  cursor: pointer;
+  background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
+  background: linear-gradient(to bottom, #3652f4, #000000);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#2aa13e 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
+}
+
+button:hover {
+  --_p: 100%;
+  transition: background-position 0.4s, background-size 0s;
+}
+
+button:active {
+  box-shadow: 0 0 9e9Q inset #0009;
+  background-color: var(--c);
+  color: #fff;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  font-family: "Rocher";
+}
+
+.choice-checkbox {
+  width: 17px; 
+  height: 20px; 
+  margin-top: 10px;
+  margin-left: 13px;
+  margin-right: 5px;
+  cursor: pointer;
+
+  
+}
+
+
+.choice-checkbox:checked {
+  background-color: #36b725; 
+  border: 1px solid #27e90d; 
+  
+}

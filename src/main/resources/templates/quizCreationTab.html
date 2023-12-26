@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="cache-control"
+      content="no-store, no-cache, must-revalidate"
+    />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <link rel="stylesheet" href="quizCreationStyle.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="label">
+        <label for="questionNumber">How many questions:</label>
+      </div>
+      <form action="/quizCreationTab" method="post">
+        <input
+          type="number"
+          id="questionNumber"
+          name="questionNumber"
+          placeholder="..max(10)"
+          required
+          min="1"
+          max="10"
+        />
+        <div class="button-container">
+          <button type="button" onclick="goBack()">Back</button>
+          <button type="submit">Next</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="questionFieldsContainer" style="display: none"></div>
+
+    <script>
+      function goBack() {
+        window.location.href = "/teacherMain";
+      }
+    </script>
+    
+  </body>
+</html>

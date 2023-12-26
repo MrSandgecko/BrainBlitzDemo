@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="cache-control"
+      content="no-store, no-cache, must-revalidate"
+    />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <link rel="stylesheet" href="studentMainStyle.css" />
+    <title>studentMain</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="welcome">
+        <h1 style="text-align: center;">BlitzBrain</h1>
+      </div>
+      <div class="buttons-container">
+        <button type="button"onclick="createTab()">Create Quiz</button>
+        <button type="button">Quiz List</button>
+        <button type="button" onclick="logout()">logout</button>
+      </div>
+    </div>
+    <script>
+      function logout() {
+        window.location.href = "/login";
+      }
+    </script>
+    <script>
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+    </script>
+
+    <script>
+    function createTab(){
+      window.location.href = "/quizCreationTab";
+    }
+    </script>
+  </body>
+</html>
