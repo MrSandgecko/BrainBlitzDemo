@@ -15,11 +15,12 @@
   <body>
     <div class="main-container">
       <div class="welcome">
-        <h1 style="text-align: center;">BlitzBrain</h1>
+        <h1 style="text-align: center">BlitzBrain</h1>
       </div>
       <div class="buttons-container">
-        <button type="button"onclick="createTab()">Create Quiz</button>
-        <button type="button">Quiz List</button>
+        <button type="button">Play</button>
+        <button type="button" onclick="createTab()">Create Quiz</button>
+        <button type="button" onclick="quizListTab()">Quiz list</button>
         <button type="button" onclick="logout()">logout</button>
       </div>
     </div>
@@ -36,9 +37,15 @@
     </script>
 
     <script>
-    function createTab(){
-      window.location.href = "/quizCreationTab";
-    }
+      function createTab() {
+        window.location.href = "/quizCreationTab";
+      }
+    </script>
+
+    <script>
+      function quizListTab() {
+        window.location.href = "/quizList";
+      }
     </script>
   </body>
 </html>

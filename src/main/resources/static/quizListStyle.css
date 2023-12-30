@@ -1,0 +1,100 @@
+@font-face {
+    font-family: "Rocher";
+    src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+  }
+  
+  @font-palette-values --Grays {
+    font-family: Rocher;
+    base-palette: 2;
+  }
+  
+  @font-palette-values --blues {
+    font-family: Rocher;
+    base-palette: 4;
+  }
+  
+  body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+    background: linear-gradient(to bottom, #0f9b0f, #000000);
+    margin: 0;
+    height: 100vh;
+    min-height: 100%;
+    overflow-y: auto;
+  }
+  
+  .header-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  h1 {
+    font-size: 70px;
+    font-family: "Rocher";
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  
+  .container {
+    position: relative;
+    background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+    background: linear-gradient(to bottom, #0f9b0f, #000000);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 900px;
+    height: 120px; 
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  
+  .container:hover {
+    width: 1000px;
+    cursor: pointer;
+  }
+  
+  .section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .section p {
+    font-size: 30px;
+    font-family: "Rocher";
+    font-palette: --blues;
+  }
+  
+  label {
+    font-size: 25px;
+    font-family: "Rocher";
+    font-palette: --Grays;
+  }
+  
+  .seperator {
+    width: 2px;
+    background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+    background: linear-gradient(to bottom, #69d669, #023505);
+    height: 130px; 
+    margin: 0 10px;
+  }
+  
+  .back-container {
+      position: absolute;
+      top: 10px; 
+      left: 10px; 
+      z-index: 1; 
+    }
+  
+  button {
+    font-size: 18px;
+  }
+  

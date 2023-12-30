@@ -62,7 +62,7 @@ body {
     background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
     outline-offset: 0.1em;
     transition: background-size 0.4s, background-position 0s 0.4s;
-    font-family: system-ui, sans-serif;
+    font-family: "Rocher";
     font-size: 3.4rem;
     color: aliceblue;
     cursor: pointer;
@@ -83,7 +83,7 @@ body {
       background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
       outline-offset: 0.1em;
       transition: background-size 0.4s, background-position 0s 0.4s;
-      font-family: system-ui, sans-serif;
+      font-family: "Rocher";
       font-size: 3.4rem;
       color: aliceblue;
       cursor: pointer;
@@ -104,7 +104,7 @@ body {
       background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
       outline-offset: 0.1em;
       transition: background-size 0.4s, background-position 0s 0.4s;
-      font-family: system-ui, sans-serif;
+      font-family: "Rocher";
       font-size: 3.4rem;
       color: aliceblue;
       cursor: pointer;

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Services;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,10 +19,14 @@ public class LoginService {
         teacherCredentials = new HashMap<>();
         studentCredentials = new HashMap<>();
 
-        // Load credentials from the database for teachers
+        /********************************
+         * * Load credentials from the database for teachers
+         *******************************/
         LoadCredsFromDB("teachers", teacherCredentials);
 
-        // Load credentials from the database for students
+        /********************************
+         * * Load credentials from the database for students
+         *******************************/
         LoadCredsFromDB("students", studentCredentials);
     }
 
@@ -47,6 +51,10 @@ public class LoginService {
         }
     }
 
+    /********************************
+     * * Check if account exists
+     *******************************/
+
     public boolean authenticate(String userName, String password) {
         if (teacherCredentials.containsKey(userName) && teacherCredentials.get(userName).equals(password)) {
             return true;
@@ -58,6 +66,9 @@ public class LoginService {
         }
     }
 
+      /********************************
+         * * Teacher or Student? comes in handy
+         *******************************/
     public String getUserType(String userName) {
         if (teacherCredentials.containsKey(userName)) {
             return "teacher";

@@ -5,154 +5,151 @@
 
 @font-palette-values --Grays {
   font-family: Rocher;
-  base-palette: 8;
+  base-palette: 2;
 }
 
-
 .container {
-width: 30%;
-text-align: center;
-background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
-background: linear-gradient(to bottom, #0f9b0f, #000000);
-padding: 0px 50px 10px 50px; 
-border-radius: 10px; 
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  text-align: center;
+  background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+  background: linear-gradient(to bottom, #0f9b0f, #000000);
+  padding: 0px 50px 10px 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 body {
-text-align: center;
-font-size: 40px; 
-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background: #000000;
-background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
-background: linear-gradient(to bottom, #0f9b0f, #000000);
+  text-align: center;
+  font-size: 40px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+  background: linear-gradient(to bottom, #0f9b0f, #000000);
 }
 
 label {
-font-size: 35px;
-font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-width: 100%;
+  font-family: "Rocher";
+  font-palette: --Grays;
+  margin-top: 30px;
+  font-size: 35px;
+  width: 100%;
 
+  margin-bottom: 30px;
+}
 
-margin-bottom: 30px;
+.input-container {
+  display: grid;
 }
 
 input {
-align-items: center;
-padding: 25px; 
-margin-bottom: 25px; 
-box-sizing: border-box;
-background-color: #141414;
-font-size: 20px;
-color: white;
-border: 1px solid #555;
-border-radius: 4px;
-}
-
-.components {
-display: grid;
-flex-direction: column;
-align-items: center;
+  align-items: center;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-sizing: border-box;
+  background-color: #141414;
+  font-size: 20px;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 4px;
 }
 
 .buttons-container {
-  
-display: flex;
-justify-content: space-between;
-gap: 10px;
-margin-top: 20px; 
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 button {
-flex: 1;
-margin-bottom: 20px;
-padding: 10px; 
-font-family: "Rocher";
-font-size: 30px; 
-cursor: pointer;
-background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
-background: linear-gradient(to bottom, #3652f4, #000000);
-color: white;
-border: none;
-border-radius: 6px;
---c: #;
-box-shadow: 0 0 0 0.1em inset var(--c);
---_g: linear-gradient(#f47536 0 0) no-repeat;
-background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
-  var(--_g) calc(200% - var(--_p, 0%)) 0%,
-  var(--_g) calc(var(--_p, 0%) - 100%) 100%,
-  var(--_g) calc(200% - var(--_p, 0%)) 100%;
-background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
-outline-offset: 0.1em;
-transition: background-size 0.4s, background-position 0s 0.4s;
+  flex: 1;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-family: "Rocher";
+  font-size: 30px;
+  cursor: pointer;
+  background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
+  background: linear-gradient(to bottom, #3652f4, #000000);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#f47536 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
 }
 
 button:last-child {
   font-family: "Rocher";
 
-flex: 1;
-margin-bottom: 20px;
-padding: 10px;
-font-size: 30px; 
-cursor: pointer;
-background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
-background: linear-gradient(to bottom, #3652f4, #000000);
-color: white;
-border: none;
-border-radius: 6px;
---c: #;
-box-shadow: 0 0 0 0.1em inset var(--c);
---_g: linear-gradient(#b77319 0 0) no-repeat;
-background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
-  var(--_g) calc(200% - var(--_p, 0%)) 0%,
-  var(--_g) calc(var(--_p, 0%) - 100%) 100%,
-  var(--_g) calc(200% - var(--_p, 0%)) 100%;
-background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
-outline-offset: 0.1em;
-transition: background-size 0.4s, background-position 0s 0.4s;
+  flex: 1;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
+  background: linear-gradient(to bottom, #3652f4, #000000);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#b77319 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
 }
 
 button:hover {
---_p: 100%;
-transition: background-position 0.4s, background-size 0s;
+  --_p: 100%;
+  transition: background-position 0.4s, background-size 0s;
 }
 
 button:active {
-box-shadow: 0 0 9e9Q inset #0009;
-background-color: var(--c);
-color: #fff;
+  box-shadow: 0 0 9e9Q inset #0009;
+  background-color: var(--c);
+  color: #fff;
 }
 
 .additional-content button {
-margin-bottom: -100px;
-flex: 1;
-margin-bottom: 20px;
-padding: 10px;
-font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-font-size: 30px; 
-cursor: pointer;
-background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
-background: linear-gradient(to bottom, #3652f4, #000000);
-color: white;
-border: none;
-border-radius: 6px;
---c: #;
-box-shadow: 0 0 0 0.1em inset var(--c);
---_g: linear-gradient(#414541 0 0) no-repeat;
-background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
-  var(--_g) calc(200% - var(--_p, 0%)) 0%,
-  var(--_g) calc(var(--_p, 0%) - 100%) 100%,
-  var(--_g) calc(200% - var(--_p, 0%)) 100%;
-background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
-outline-offset: 0.1em;
-transition: background-size 0.4s, background-position 0s 0.4s;
+  margin-bottom: -100px;
+  flex: 1;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 30px;
+  cursor: pointer;
+  background: -webkit-linear-gradient(to bottom, #3662f4, #000000);
+  background: linear-gradient(to bottom, #3652f4, #000000);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#414541 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
 }
 
 .additional-content button:hover {
---_p: 100%;
-transition: background-position 0.4s, background-size 0s;
+  --_p: 100%;
+  transition: background-position 0.4s, background-size 0s;
 }

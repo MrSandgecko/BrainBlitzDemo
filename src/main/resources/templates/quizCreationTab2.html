@@ -13,210 +13,326 @@
   </head>
 
   <body>
-    <script>
-      window.onload = function () {
-        var questionNumber = 3;
-        var parentContainer = document.body;
+    <form id="quizForm" action="/saveQuiz" method="post">
+      <script>
+        var questionsList = [];
+        var choicesList = [];
+        var answerList = [];
 
-        function Generate() {
-          for (var i = 0; i < questionNumber; i++) {
-            var container = createMainContainer(i);
-            container.className = "container";
+        /**************************************************
+         * * Getting variables from /quizCreationTab
+         **************************************************/
+        window.onload = function () {
+          var questionNumber = parseInt(
+            new URLSearchParams(window.location.search).get("questionNumber")
+          );
 
-            var componentsDiv = createContainer();
-            componentsDiv.className = "components";
+          var quizName = String(
+            new URLSearchParams(window.location.search).get("quizName")
+          );
+          document.getElementById("quizNameInput").value = quizName;
 
-            var label = document.createElement("label");
-            label.htmlFor = "questionInput" + i;
-            label.innerText = "Question " + (i + 1);
-            container.appendChild(label);
+          // questionNumber = 3;
+          var parentContainer = document.body;
 
-            var input = createInput(
-              "text",
-              "questionInput" + i,
-              "Input Question here..."
-            );
-            input.className = "question-input";
+          /*****************************************************
+           * * Main Function to Generate based on questionNumer
+           *****************************************************/
 
-            var choiceContainer = createContainer();
-            choiceContainer.className = "choices-container";
-            choiceContainer.id = "additionalChoices" + i;
+          function Generate() {
+            for (var i = 0; i < questionNumber; i++) {
+              var container = createMainContainer(i);
+              container.className = "container";
 
-            // Generate and display choice fields with numbers
-            for (var j = 1; j <= 4; j++) {
-              var checkbox = createInput(
-                "checkbox",
-                "checkboxInput" + i + "_" + j,
-                ""
-              );
-              checkbox.className = "choice-checkbox";
+              var componentsDiv = createContainer();
+              componentsDiv.className = "components";
 
-             
-              checkbox.setAttribute("data-container-index", i);
+              var label = document.createElement("label");
+              label.htmlFor = "questionInput" + i;
+              label.innerText = "Question " + (i + 1);
+              container.appendChild(label);
 
-              choiceContainer.appendChild(checkbox);
-
-              var choiceInput = createInput(
+              var input = createInput(
                 "text",
-                "choiceInput" + i + "_" + j,
-                "Input Choice here..."
+                "questionInput" + i,
+                "Input Question here..."
               );
-              choiceInput.className = "choice-input";
-              choiceContainer.appendChild(choiceInput);
+              input.className = "question-input";
 
-             
-              checkbox.addEventListener("change", function () {
-                var currentContainerIndex = parseInt(
-                  this.getAttribute("data-container-index")
+              var choiceContainer = createContainer();
+              choiceContainer.className = "choices-container";
+              choiceContainer.id = "choices-container" + i;
+
+              for (var j = 1; j <= 4; j++) {
+                var checkbox = createInput(
+                  "checkbox",
+                  "checkboxInput" + i + "_" + j,
+                  ""
                 );
-                var checkboxes = document.querySelectorAll(
+                checkbox.className = "choice-checkbox";
+                checkbox.setAttribute("data-container-index", i);
+                choiceContainer.appendChild(checkbox);
+
+                var choiceInput = createInput(
+                  "text",
+                  "choiceInput" + i + "_" + j,
+                  "Input Choice here..."
+                );
+                choiceInput.className = "choice-input";
+                choiceContainer.appendChild(choiceInput);
+              }
+
+              choiceContainer.addEventListener("change", function (event) {
+                var currentContainerIndex = parseInt(
+                  event.target.getAttribute("data-container-index")
+                );
+
+                var checkboxes = event.currentTarget.querySelectorAll(
                   '.choice-checkbox[data-container-index="' +
                     currentContainerIndex +
                     '"]'
                 );
 
-                // Uncheck other checkboxes in the same container
-                checkboxes.forEach((cb) => {
-                  if (cb !== this) {
-                    cb.checked = false;
-                  }
+                checkboxes.forEach(function (checkbox) {
+                  checkbox.checked = checkbox === event.target;
                 });
+
+                /*****Take only the last number at the end of a boxes id. Very Cool!!******/
+                // var whichOneIsChecked = "checked one is: " + this.id.match(/\d+$/)[0];
+
+                /*****Takes both numbers in the string. Very Very Cool!!******/
+                // combinedVariable = this.id.match(/\d+/g).join("_");
+                // console.log("Combined Variable:", combinedVariable);
+
+                // Update combinedVariable with the checked checkbox value
+                combinedVariable = event.target.checked
+                  ? event.target.id.match(/\d+/g).join("_")
+                  : null;
+
+                console.log("Combined Variable:", combinedVariable);
               });
+
+              componentsDiv.appendChild(input);
+              componentsDiv.appendChild(choiceContainer);
+
+              /**************************************************
+               * * Clear Button
+               **************************************************/
+              var clearButton = document.createElement("button");
+              clearButton.innerText = "Clear";
+              clearButton.onclick = function () {
+                var containerIndex = parseInt(
+                  this.getAttribute("data-container-index")
+                );
+                var currentQuestionInput = document.getElementById(
+                  "questionInput" + containerIndex
+                );
+                if (currentQuestionInput) {
+                  currentQuestionInput.value = "";
+                }
+
+                var currentChoiceContainer = document.getElementById(
+                  "choices-container" + containerIndex
+                );
+                if (currentChoiceContainer) {
+                  var choiceInputs =
+                    currentChoiceContainer.querySelectorAll(".choice-input");
+                  choiceInputs.forEach(function (choiceInput) {
+                    choiceInput.value = "";
+                  });
+                }
+              };
+
+              clearButton.setAttribute("data-container-index", i);
+              componentsDiv.appendChild(clearButton);
+
+              container.appendChild(componentsDiv);
+              parentContainer.appendChild(container);
             }
 
-            componentsDiv.appendChild(input);
-            componentsDiv.appendChild(choiceContainer);
-
-            // Add a "Clear" button
-            var clearButton = document.createElement("button");
-            clearButton.innerText = "Clear";
-            clearButton.onclick = function () {
-              var containerIndex = parseInt(
-                this.getAttribute("data-container-index")
-              );
-              var currentQuestionInput = document.getElementById(
-                "questionInput" + containerIndex
-              );
-              if (currentQuestionInput) {
-                currentQuestionInput.value = "";
+            for (var j = 1; j < questionNumber; j++) {
+              var containerToHide = document.getElementById("container" + j);
+              if (containerToHide) {
+                containerToHide.style.display = "none";
               }
+            }
 
-              var currentChoiceContainer = document.getElementById(
-                "additionalChoices" + containerIndex
+            var firstContainer = document.getElementById("container0");
+            if (firstContainer) {
+              firstContainer.style.display = "block";
+            }
+
+            function confirmContinue() {
+              return confirm("Save Quiz?");
+            }
+            /**************************************************
+             * * Next Button
+             **************************************************/
+            var nextButton = document.createElement("button");
+            nextButton.innerText = "Next";
+            nextButton.className = "next-button";
+            nextButton.onclick = function () {
+              /*************get Questions*********************/
+              var currentContainer = document.getElementById(
+                "container" + currentQuestion
               );
-              if (currentChoiceContainer) {
-                var choiceInputs =
-                  currentChoiceContainer.querySelectorAll(".choice-input");
-                choiceInputs.forEach(function (choiceInput) {
-                  choiceInput.value = "";
-                });
+              var currentQuestionContent =
+                currentContainer.querySelector(".question-input");
+              var trimQuestion = currentQuestionContent.value.trim();
+
+              /*************get Choices*********************/
+              var currentContainer = document.getElementById(
+                "container" + currentChoice
+              );
+              var allChoices = Array.from(
+                currentContainer.querySelectorAll(".choice-input")
+              ).map((choiceInput) => choiceInput.value.trim());
+
+              /*************get Checkbox*********************/
+              var isChecked = false;
+
+              var checkboxes = document.querySelectorAll(
+                '.choice-checkbox[data-container-index="' + currentChoice + '"]'
+              );
+
+              checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                  // console.log(checkboxes);
+                  isChecked = true;
+                }
+              });
+              /*************Checking if filled*********************/
+              if (
+                trimQuestion != "" &&
+                allChoices.every((choice) => choice !== "" && isChecked == true)
+              ) {
+                choicesList[currentChoice] = allChoices;
+                questionsList[currentQuestion] = trimQuestion;
+                answerList[currentChoice] = combinedVariable;
+                console.log("Type of choicesList element:", typeof choicesList);
+
+                document.getElementById("questionsListInput").value =
+                  JSON.stringify(questionsList);
+                document.getElementById("choicesListInput").value =
+                  JSON.stringify(choicesList);
+                document.getElementById("answerListInput").value =
+                  JSON.stringify(answerList);
+
+                /************************************************/
+
+                currentContainer.style.display = "none";
+                currentQuestion++;
+                currentChoice++;
+                currentAnswer++;
+
+                var nextContainer = document.getElementById(
+                  "container" + currentQuestion
+                );
+
+                if (nextContainer) {
+                  nextContainer.style.display = "block";
+                  console.log(questionsList);
+                  console.log(choicesList);
+                  console.log(answerList);
+                } else {
+                  if (confirmContinue()) {
+                    /*****************Submit*********************/
+                    alert("Quiz saved!");
+                    document.getElementById("quizForm").submit();
+                  } else {
+                    currentQuestion--;
+                    currentChoice--;
+                    currentAnswer--;
+                    currentContainer.style.display = "block";
+                  }
+                }
+              } else {
+                alert("Fill everthing stoopid");
               }
             };
 
-            clearButton.setAttribute("data-container-index", i);
-            componentsDiv.appendChild(clearButton);
-
-            container.appendChild(componentsDiv);
-            parentContainer.appendChild(container);
+            parentContainer.appendChild(nextButton);
           }
 
-          for (var j = 1; j < questionNumber; j++) {
-            var containerToHide = document.getElementById("container" + j);
-            if (containerToHide) {
-              containerToHide.style.display = "none";
-            }
-          }
+          /**************************************************
+           * * Back Button
+           **************************************************/
+          var backButton = document.createElement("button");
+          backButton.innerText = "Back";
+          backButton.className = "back-button";
+          backButton.onclick = function () {
+            /*************deleting Last entry to List ****************/
+            questionsList.pop();
+            choicesList.pop();
+            /*************.pop() doesnt work on answerList :/ ****************/
+            answerList.pop();
 
-          var firstContainer = document.getElementById("container0");
-          if (firstContainer) {
-            firstContainer.style.display = "block";
-          }
+            console.log(questionsList);
+            console.log(choicesList);
+            console.log(answerList);
 
-          function confirmContinue() {
-            return confirm("Are you sure you want to continue?");
-          }
-
-          // Add a "Next" button
-          var nextButton = document.createElement("button");
-          nextButton.innerText = "Next";
-          nextButton.className = "next-button";
-          nextButton.onclick = function () {
             var currentContainer = document.getElementById(
               "container" + currentQuestion
             );
-
             currentContainer.style.display = "none";
-            currentQuestion++;
-
-            var nextContainer = document.getElementById(
+            currentQuestion--;
+            currentChoice--;
+            currentAnswer--;
+            var prevContainer = document.getElementById(
               "container" + currentQuestion
             );
 
-            if (nextContainer) {
-              nextContainer.style.display = "block";
+            if (prevContainer) {
+              prevContainer.style.display = "block";
             } else {
-              // Ask for confirmation before alerting
-              if (confirmContinue()) {
-                alert("End of quiz");
-                //save the content of the qustion fields, choices fields and which choice is checked of each container to the database....
-                window.location.href = "/teacherMain"
-
-              } else {
-                // User clicked Cancel, go back to the last question
-                currentQuestion--;
-                currentContainer.style.display = "block";
-              }
+              alert("Canceling...");
+              window.location.href = "/quizCreationTab";
             }
           };
 
-          parentContainer.appendChild(nextButton);
-        }
+          parentContainer.appendChild(backButton);
 
-        // Add a "Back" button
-        var backButton = document.createElement("button");
-        backButton.innerText = "Back";
-        backButton.className = "back-button";
-        backButton.onclick = function () {
-          var currentContainer = document.getElementById(
-            "container" + currentQuestion
-          );
-          currentContainer.style.display = "none";
-          currentQuestion--;
-          var prevContainer = document.getElementById(
-            "container" + currentQuestion
-          );
-          if (prevContainer) {
-            prevContainer.style.display = "block";
-          } else {
-            alert("Canceling...");
-            window.location.href = "/quizCreationTab";
+          /**************************************************
+           * * Generate Layout
+           **************************************************/
+          function createMainContainer(questionIndex) {
+            var container = document.createElement("div");
+            container.id = "container" + questionIndex;
+            container.style.marginBottom = "20px";
+            return container;
           }
+
+          function createContainer() {
+            return document.createElement("div");
+          }
+
+          function createInput(type, id, placeholder) {
+            var input = document.createElement("input");
+            input.type = type;
+            input.id = id;
+            input.placeholder = placeholder;
+            return input;
+          }
+
+          var currentQuestion = 0;
+          var currentChoice = 0;
+          var currentAnswer = 0; //Useless??
+          Generate();
         };
+      </script>
 
-        parentContainer.appendChild(backButton);
-
-        function createMainContainer(questionIndex) {
-          var container = document.createElement("div");
-          container.id = "container" + questionIndex;
-          container.style.marginBottom = "20px";
-          return container;
-        }
-
-        function createContainer() {
-          return document.createElement("div");
-        }
-
-        function createInput(type, id, placeholder) {
-          var input = document.createElement("input");
-          input.type = type;
-          input.id = id;
-          input.placeholder = placeholder;
-          return input;
-        }
-
-        var currentQuestion = 0;
-        Generate();
-      };
-    </script>
+      /********************************************************************
+      <!-- This is what gets submitted to the Controller -->
+      *****************************************************************/
+      <input
+        type="hidden"
+        id="quizNameInput"
+        name="quizName"
+        value="${quizName}"
+      />
+      <input type="hidden" id="questionsListInput" name="questionsList" />
+      <input type="hidden" id="choicesListInput" name="choicesList" />
+      <input type="hidden" id="answerListInput" name="answerList" />
+    </form>
   </body>
 </html>
