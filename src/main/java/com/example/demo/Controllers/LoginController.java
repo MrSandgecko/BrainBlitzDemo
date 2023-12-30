@@ -16,61 +16,47 @@ import org.springframework.ui.Model;
 @Controller
 public class LoginController {
 
+    private final LoginService loginService;
+
+    @Autowired
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
+
     @GetMapping("/login")
     public String showQuiz() {
         return "login";
     }
 
-    @Autowired
-    LoginService loginService = new LoginService();
-
     @PostMapping("/login")
     public String AuthenticateUser(@RequestParam String username, @RequestParam String password, Model model) {
 
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
-            model.addAttribute("Login error", "Invalid username or password. Please enter valid credentials.");
+            
+            System.out.println(model.addAttribute("Login error", "Invalid username or password. Please enter valid credentials."));
             return "login";
         }
 
         String userType = loginService.getUserType(username);
-        boolean isauthenticated = loginService.authenticate(username, password);
 
-        if ("teacher".equals(userType) && isauthenticated || "admin".equals(userType) && isauthenticated) {
-            model.addAttribute("username", username);
+        if (userType != null) {
+            if (userType.contains("Teacher")) {
+                if(loginService.checkCreds(userType, username, password)){
+                return "/teacherMain";
+                }else{
+                    System.out.println("Invalid username or password. LOL");
+                    return "/login";
+                }
 
-            HashMap<String, String> teacherNextPagePathMap = new HashMap<>();
-            teacherNextPagePathMap.put("admin", "/teacherMain");
-            teacherNextPagePathMap.put("Teacher1", "/teacherMain");
-            teacherNextPagePathMap.put("Teacher2", "/teacherMain");
-
-            String nextPagePathType = teacherNextPagePathMap.get(username);
-
-            System.out.println("User Type: " + userType);
-            System.out.println("Is Authenticated: " + isauthenticated);
-            System.out.println("Next Page Path Type: " + nextPagePathType);
-
-            if (nextPagePathType != null) {
-                return "redirect:" + nextPagePathType;
-            }
-        } else if ("student".equals(userType) && isauthenticated || "notadmin".equals(userType) && isauthenticated) {
-            model.addAttribute("username", username);
-
-            HashMap<String, String> studentNextPagePathMap = new HashMap<>();
-            studentNextPagePathMap.put("notadmin", "/studentMain");
-            studentNextPagePathMap.put("Student1", "/studentMain");
-            studentNextPagePathMap.put("Student2", "/studentMain");
-            String nextPagePathType = studentNextPagePathMap.get(username);
-
-            System.out.println("User Type: " + userType);
-            System.out.println("Is Authenticated: " + isauthenticated);
-            System.out.println("Next Page Path Type: " + nextPagePathType);
-
-            if (nextPagePathType != null) {
-                return "redirect:" + nextPagePathType;
+            } else if (userType.contains("Student")) {
+                if(loginService.checkCreds(userType, username, password)){
+                return "/studentMain";
+                }else{
+                    System.out.println("Invalid username or password. LOL");
+                    return "/login";
+                }
             }
         }
-
-        model.addAttribute("Login error", "Invalid username or password. lol");
         return "login";
     }
 }

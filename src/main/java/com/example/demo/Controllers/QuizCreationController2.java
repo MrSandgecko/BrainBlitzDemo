@@ -88,7 +88,6 @@ public class QuizCreationController2 {
                 ChoicesEnt choice = new ChoicesEnt();
                 choice.setQuestion(question);
                 choice.setChoices(choiceText);
-
                 choicesRepository.save(choice);
             }
             for (String answerText : answerList.get(i)) {

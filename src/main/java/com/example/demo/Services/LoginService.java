@@ -1,81 +1,56 @@
 package com.example.demo.Services;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
-    private Map<String, String> teacherCredentials;
-    private Map<String, String> studentCredentials;
+    private final TeachersService teachersService;
+    private final StudentsService studentsService;
 
-    public LoginService() {
-        teacherCredentials = new HashMap<>();
-        studentCredentials = new HashMap<>();
+    @Autowired
+    public LoginService(TeachersService teachersService, StudentsService studentsService) {
 
-        /********************************
-         * * Load credentials from the database for teachers
-         *******************************/
-        LoadCredsFromDB("teachers", teacherCredentials);
+        this.teachersService = teachersService;
+        this.studentsService = studentsService;
 
-        /********************************
-         * * Load credentials from the database for students
-         *******************************/
-        LoadCredsFromDB("students", studentCredentials);
+        teachersService.initializeTeachersAccounts();
+        studentsService.initializeStudentsAccoutns();
+
     }
 
-    private void LoadCredsFromDB(String tableName, Map<String, String> credentialsMap) {
-        String url = "jdbc:mysql://localhost:3306/new_schema";
-        String user = "root";
-        String password = "admin1234";
+    // /************************************************************************
+    // *Check if account exists and if its a Teacher or Student? comes in handy.
+    // *************************************************************************/
+    public String getUserType(String username) {
 
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT username, password FROM " + tableName;
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    while (resultSet.next()) {
-                        String username = resultSet.getString("username");
-                        String pass = resultSet.getString("password");
-                        credentialsMap.put(username, pass);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+        if (teachersService.isType(username)) {
 
-    /********************************
-     * * Check if account exists
-     *******************************/
-
-    public boolean authenticate(String userName, String password) {
-        if (teacherCredentials.containsKey(userName) && teacherCredentials.get(userName).equals(password)) {
-            return true;
-        } else if (studentCredentials.containsKey(userName) && studentCredentials.get(userName).equals(password)) {
-            return true;
-        } else {
-            System.out.println("Invalid username or password.");
-            return false;
-        }
-    }
-
-      /********************************
-         * * Teacher or Student? comes in handy
-         *******************************/
-    public String getUserType(String userName) {
-        if (teacherCredentials.containsKey(userName)) {
-            return "teacher";
-        } else if (studentCredentials.containsKey(userName)) {
-            return "student";
+            return "Teacher";
+        } else if (studentsService.isType(username)) {
+            return "Student";
         } else {
             return null;
         }
+    }
+
+    // /**********************************************
+    // *Check if password is correct
+    // ***********************************************/
+    public boolean checkCreds(String userType, String username, String password) {
+        if (userType.contains("Teacher")) {
+            if (teachersService.checkValidation(username, password)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (studentsService.checkValidation(username, password)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 }
