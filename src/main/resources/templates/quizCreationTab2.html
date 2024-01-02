@@ -16,8 +16,8 @@
     <form id="quizForm" action="/saveQuiz" method="post">
       <script>
         var questionsList = [];
-        var choicesList = [];
         var answerList = [];
+        var choicesList = [];
 
         /**************************************************
          * * Getting variables from /quizCreationTab
@@ -206,15 +206,16 @@
                 trimQuestion != "" &&
                 allChoices.every((choice) => choice !== "" && isChecked == true)
               ) {
+                console.log("Type of choicesList element:", typeof choicesList);
                 choicesList[currentChoice] = allChoices;
                 questionsList[currentQuestion] = trimQuestion;
                 answerList[currentChoice] = combinedVariable;
-                console.log("Type of choicesList element:", typeof choicesList);
 
+                /*************Assign to hidden fields*******************/
                 document.getElementById("questionsListInput").value =
                   JSON.stringify(questionsList);
-                document.getElementById("choicesListInput").value =
-                  JSON.stringify(choicesList);
+                console.log("choicesList before sending:", choicesList);
+                document.getElementById("choicesListInput").value = choicesList;
                 document.getElementById("answerListInput").value =
                   JSON.stringify(answerList);
 
@@ -239,6 +240,7 @@
                     /*****************Submit*********************/
                     alert("Quiz saved!");
                     document.getElementById("quizForm").submit();
+                    // window.location.href = "/teacherMain";
                   } else {
                     currentQuestion--;
                     currentChoice--;
@@ -264,7 +266,7 @@
             /*************deleting Last entry to List ****************/
             questionsList.pop();
             choicesList.pop();
-            /*************.pop() doesnt work on answerList :/ ****************/
+            
             answerList.pop();
 
             console.log(questionsList);
@@ -321,9 +323,9 @@
         };
       </script>
 
-      /********************************************************************
+      <!-- /******************************************************************** -->
       <!-- This is what gets submitted to the Controller -->
-      *****************************************************************/
+      <!-- *****************************************************************/ -->
       <input
         type="hidden"
         id="quizNameInput"

@@ -1,37 +1,40 @@
 package com.example.demo.Model;
 
+import java.util.ArrayList;
+import java.util.List;
 
-
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "choices")
-
 public class ChoicesEnt {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String choicesList;
+    private long id;
 
     @ManyToOne
-    @JoinColumn
-    private QuestionEnt question;
+    private QuestionsEnt question;
 
-    public void setQuestion(QuestionEnt question) {
+    @ElementCollection
+    @CollectionTable(name = "choice_content", joinColumns = @JoinColumn(name = "choices_id"))
+    @Column(name = "choice_content")
+    private List<String> choices; 
+
+    public void setQuestion(QuestionsEnt question) {
         this.question = question;
     }
 
-    public void setChoices(String choiceText) {
-        this.choicesList = choiceText;
+    public void setChoices(List<String> choices) {
+        this.choices = choices;
+
     }
+
+    @Override
+    public String toString() {
+        return "ChoicesEnt{" +
+                "choiceContent='" + choices + '\'' +
+                '}';
+    }
+
 
 }

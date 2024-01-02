@@ -1,8 +1,5 @@
 package com.example.demo.Controllers;
 
-import java.util.HashMap;
-
-// import org.hibernate.usertype.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +29,9 @@ public class LoginController {
     public String AuthenticateUser(@RequestParam String username, @RequestParam String password, Model model) {
 
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
-            
-            System.out.println(model.addAttribute("Login error", "Invalid username or password. Please enter valid credentials."));
+
+            System.out.println(
+                    model.addAttribute("Login error", "Invalid username or password. Please enter valid credentials."));
             return "login";
         }
 
@@ -41,17 +39,17 @@ public class LoginController {
 
         if (userType != null) {
             if (userType.contains("Teacher")) {
-                if(loginService.checkCreds(userType, username, password)){
-                return "/teacherMain";
-                }else{
+                if (loginService.checkCreds(userType, username, password)) {
+                    return "/teacherMain";
+                } else {
                     System.out.println("Invalid username or password. LOL");
                     return "/login";
                 }
 
             } else if (userType.contains("Student")) {
-                if(loginService.checkCreds(userType, username, password)){
-                return "/studentMain";
-                }else{
+                if (loginService.checkCreds(userType, username, password)) {
+                    return "/studentMain";
+                } else {
                     System.out.println("Invalid username or password. LOL");
                     return "/login";
                 }

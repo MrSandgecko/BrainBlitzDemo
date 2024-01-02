@@ -19,10 +19,7 @@ public class QuizCreationController {
     public String processQuizCreation(@RequestParam int questionNumber, @RequestParam String quizName, Model model) {
         model.addAttribute("questionNumber", questionNumber);
         model.addAttribute("quizName", quizName);
-        
-
 
         return "redirect:/quizCreationTab2?questionNumber=" + questionNumber + "&quizName=" + quizName;
     }
-
 }

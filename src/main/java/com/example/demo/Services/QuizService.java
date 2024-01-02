@@ -8,19 +8,10 @@ import com.example.demo.Repository.QuizRep;
 
 @Service
 public class QuizService {
-
-    private final QuizRep quizRep;
-
     @Autowired
-    public QuizService(QuizRep quizRep) {
-        this.quizRep = quizRep;
-    }
+    private QuizRep quizRep;
 
-    public QuizEnt saveQuiz(String quizName) {
-        /******** Java XD *********/
-        QuizEnt quiz = new QuizEnt();
-
-        quiz.setQuizName(quizName);
+    public QuizEnt saveQuiz(QuizEnt quiz){
         return quizRep.save(quiz);
     }
 }
