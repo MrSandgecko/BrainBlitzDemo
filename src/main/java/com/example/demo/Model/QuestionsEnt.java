@@ -12,13 +12,13 @@ public class QuestionsEnt {
     @ManyToOne
     private QuizEnt quizEnt;
 
-    private String questionContent;
+    private String question;
 
     public void setQuiz(QuizEnt quiz) {
         this.quizEnt=quiz;
     }
 
-    public void setQuestionContent(String questionContent) {
-        this.questionContent = questionContent;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }

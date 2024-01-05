@@ -36,45 +36,64 @@ public class QuizSavingController {
             @RequestParam List<List<String>> choicesList,
             @RequestParam List<String> answerList) {
 
-        // newerList.add(newList.get(0));
+        quiz.setQuiz(quizName);
+        quizService.saveQuiz(quiz);
         System.out.println(quizName);
-        // System.out.println(questionsList.get(0));
-        // System.out.println(choicesList.get(3));
+
         int choicesLoop = 0;
         int choicesLoopLimit = 4;
         String currentChoice = " ";
 
         for (int i = 0; i < questionsList.size(); i++) {
 
-            if (i == 0) {
-                System.out.println("First Question: " + questionsList.get(i));
-            } else if (i == 1) {
-                System.out.println("Second Question: " + questionsList.get(i));
-            }
+            // if (i == 0) {
+            // System.out.println("First Question: " + questionsList.get(i));
+            // } else if (i == 1) {
+            // System.out.println("Second Question: " + questionsList.get(i));
+            // }.........
+            QuestionsEnt question = new QuestionsEnt();
+            question.setQuestion(questionsList.get(i));
+            question.setQuiz(quiz);
+            questionService.saveQuestion(question);
 
             for (int e = choicesLoop; e < choicesLoopLimit; e++) {
-
-                if (choicesLoop < 4) {
+                // if (choicesLoop < 4) {
                     currentChoice = "First Question choices: ";
                     System.out.println(currentChoice + choicesList.get(e));
                     System.out.println("e: " + e);
                     System.out.println("Limit: " + choicesLoopLimit);
 
-                } else if (choicesLoop >= 4) {
-                    currentChoice = "Second Question choices: ";
-                    System.out.println(currentChoice + choicesList.get(e));
-                    System.out.println("e: " + e);
-                    System.out.println("Limit: " + choicesLoopLimit);
+                    ChoicesEnt choice = new ChoicesEnt();
+                    choice.setQuestion(question);
+                    choice.setChoices("" + choicesList.get(e));
+                    choiceService.saveChoice(choice);
 
-                }
+                // } else if (choicesLoop >= 4) {
+                //     currentChoice = "Second Question choices: ";
+                //     System.out.println(currentChoice + choicesList.get(e));
+                //     System.out.println("e: " + e);
+                //     System.out.println("Limit: " + choicesLoopLimit);
 
+                //     ChoicesEnt choice = new ChoicesEnt();
+                //     choice.setQuestion(question);
+                //     choice.setChoices("" + choicesList.get(e));
+                //     choiceService.saveChoice(choice);
+
+                // }
             }
+
             choicesLoopLimit += 4;
             choicesLoop += 4;
             System.out.println("Limit: " + choicesLoopLimit);
             System.out.println("e: " + choicesLoop);
-
             System.out.println(answerList.get(i));
+
+            AnswersEnt answer = new AnswersEnt();
+            answer.setQuestion(question);
+            answer.setAnswerContent("" + answerList.get(i));
+            answerService.saveAnswer(answer);
+
+
 
         }
 

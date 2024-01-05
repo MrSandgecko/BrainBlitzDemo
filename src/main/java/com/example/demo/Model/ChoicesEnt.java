@@ -15,26 +15,18 @@ public class ChoicesEnt {
     @ManyToOne
     private QuestionsEnt question;
 
-    @ElementCollection
-    @CollectionTable(name = "choice_content", joinColumns = @JoinColumn(name = "choices_id"))
-    @Column(name = "choice_content")
-    private List<String> choices; 
+    private String choices; 
 
     public void setQuestion(QuestionsEnt question) {
         this.question = question;
     }
 
-    public void setChoices(List<String> choices) {
+    public void setChoices(String choices) {
         this.choices = choices;
 
     }
 
-    @Override
-    public String toString() {
-        return "ChoicesEnt{" +
-                "choiceContent='" + choices + '\'' +
-                '}';
-    }
+   
 
 
 }
