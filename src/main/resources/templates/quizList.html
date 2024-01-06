@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="cache-control" content="no-store, no-cache, must-revalidate" />
+    <meta
+      http-equiv="cache-control"
+      content="no-store, no-cache, must-revalidate"
+    />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="0" />
     <link rel="stylesheet" href="quizListStyle.css" />
-</head>
-<body>
+  </head>
+  <body>
     <h1>Quizzes</h1>
 
     <div th:each="quiz : ${quizzes}" class="container">
-        <div class="section">
-            <p th:text="'Number of Questions: ' + ${quiz.getNumberOfQuestions()}"></p>
-            <label for="">Questions</label>
-        </div>
-        <!-- ... (removed unnecessary sections) ... -->
+      <div class="section">
+        <p
+          th:text="${quiz.getNumberOfQuestions()}"
+        ></p>
+        <label for="">Questions</label>
+      </div>
+      <div class="seperator"></div>
+      <div class="section">
+        <label for="">Time: </label>
+        <p th:text="${quiz.getQuizTime()}"></p>
+      </div>
+      <div class="seperator"></div>
+      <div class="section">
+        <p th:text="${quiz.getQuizCategory()}"></p>
+        <label for="">Category </label>
+      </div>
+      <div class="seperator"></div>
+      <div class="section">
+        <label for="">Creator:</label>
+        <!-- <p th:text="${quiz.creator}"></p> -->
+      </div>
     </div>
-</body>
+  </body>
 </html>

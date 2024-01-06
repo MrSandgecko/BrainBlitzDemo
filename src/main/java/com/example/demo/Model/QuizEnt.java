@@ -43,4 +43,14 @@ public class QuizEnt {
         this.quizTime = quizTime;
     }
 
+    public int getQuizTime(){
+        return this.quizTime;
+
+    }
+
+    public String getQuizCategory(){
+        return this.category;
+
+    }
+
 }
