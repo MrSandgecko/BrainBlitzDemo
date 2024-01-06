@@ -1,5 +1,7 @@
 package com.example.demo.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,12 @@ public class QuizService {
     @Autowired
     private QuizRep quizRep;
 
-    public QuizEnt saveQuiz(QuizEnt quiz){
+    public QuizEnt saveQuiz(QuizEnt quiz) {
         return quizRep.save(quiz);
+    }
+
+    public List<QuizEnt> getQuizzes() {
+        return quizRep.findAll();
+
     }
 }

@@ -32,11 +32,15 @@ public class QuizSavingController {
     @PostMapping("/saveQuiz")
     public String saveQuiz(@ModelAttribute QuizEnt quiz,
             @RequestParam String quizName,
+            @RequestParam String category,
+            @RequestParam int quizTime, 
             @RequestParam List<String> questionsList,
             @RequestParam List<List<String>> choicesList,
             @RequestParam List<String> answerList) {
 
         quiz.setQuiz(quizName);
+        quiz.setCategory(category);
+        quiz.setQuizTime(quizTime);
         quizService.saveQuiz(quiz);
         System.out.println(quizName);
 
@@ -92,8 +96,6 @@ public class QuizSavingController {
             answer.setQuestion(question);
             answer.setAnswerContent("" + answerList.get(i));
             answerService.saveAnswer(answer);
-
-
 
         }
 

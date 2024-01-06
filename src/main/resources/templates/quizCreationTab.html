@@ -3,38 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      http-equiv="cache-control"
-      content="no-store, no-cache, must-revalidate"
-    />
+    <meta http-equiv="cache-control" content="no-store, no-cache, must-revalidate" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="0" />
-    <link rel="stylesheet" href="quizCreationStyle.css" />
+    <link rel="stylesheet" href="quizCreationStyle1.css" />
   </head>
 
   <body>
     <div class="container">
       <form action="/quizCreationTab" method="post">
         <div class="input-container">
-          <label for="quizName">Name your Quiz...</label>
-          <input
-            type="text"
-            id="quizName"
-            name="quizName"
-            placeholder="E.g. MyFirstQuiz101"
-            required
-            pattern="[A-Za-z0-9\s]+"
-          />
-          <label for="questionNumber">How many questions?</label>
-          <input
-            type="number"
-            id="questionNumber"
-            name="questionNumber"
-            placeholder="..max(10)"
-            required
-            min="1"
-            max="10"
-          />
+          <div class="label-input-pair">
+            <label for="quizName">Name your Quiz...</label>
+            <input
+              type="text"
+              id="quizName"
+              name="quizName"
+              placeholder="E.g. MyFirstQuiz101"
+              required
+              pattern="[A-Za-z0-9\s]+"
+            />
+          </div>
+          <div class="label-input-pair">
+            <label for="questionNumber">How many questions?</label>
+            <input
+              type="number"
+              id="questionNumber"
+              name="questionNumber"
+              placeholder="..max(10)"
+              required
+              min="1"
+              max="10"
+            />
+          </div>
+          <div class="label-input-pair">
+            <label for="category">Category: </label>
+            <input
+              type="text"
+              id="category"
+              name="category"
+              placeholder="E.g. Math, Science,..."
+              required
+              pattern="[A-Za-z0-9\s]+"
+            />
+          </div>
+          <div class="label-input-pair">
+            <label for="quizTime">Set Time : </label>
+            <input
+              type="number"
+              id="quizTime"
+              name="quizTime"
+              placeholder="..max(10 min)"
+              required
+              min="1"
+              max="10"
+            />
+          </div>
         </div>
 
         <div class="button-container">

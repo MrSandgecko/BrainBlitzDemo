@@ -16,10 +16,13 @@ public class QuizCreationController {
     }
 
     @PostMapping("/quizCreationTab")
-    public String processQuizCreation(@RequestParam int questionNumber, @RequestParam String quizName, Model model) {
+    public String processQuizCreation(@RequestParam int questionNumber, @RequestParam String quizName,
+            @RequestParam String category, @RequestParam int quizTime, Model model) {
         model.addAttribute("questionNumber", questionNumber);
         model.addAttribute("quizName", quizName);
+        model.addAttribute("category", category);
+        model.addAttribute("quizTime", quizTime);
 
-        return "redirect:/quizCreationTab2?questionNumber=" + questionNumber + "&quizName=" + quizName;
+        return "redirect:/quizCreationTab2?questionNumber=" + questionNumber + "&quizName=" + quizName + "&category=" + category + "&quizTime=" + quizTime;
     }
 }

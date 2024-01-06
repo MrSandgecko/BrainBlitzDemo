@@ -32,6 +32,14 @@
           );
           document.getElementById("quizNameInput").value = quizName;
 
+          var category = String(
+            new URLSearchParams(window.location.search).get("category")
+          );
+
+          var quizTime = parseInt(
+            new URLSearchParams(window.location.search).get("quizTime")
+          );
+
           // questionNumber = 3;
           var parentContainer = document.body;
 
@@ -266,7 +274,7 @@
             /*************deleting Last entry to List ****************/
             questionsList.pop();
             choicesList.pop();
-            
+
             answerList.pop();
 
             console.log(questionsList);
@@ -323,7 +331,7 @@
         };
       </script>
 
-      <!-- /******************************************************************** -->
+      <!-- /**************************************************************** -->
       <!-- This is what gets submitted to the Controller -->
       <!-- *****************************************************************/ -->
       <input
@@ -331,6 +339,18 @@
         id="quizNameInput"
         name="quizName"
         value="${quizName}"
+      />
+      <input
+        type="hidden"
+        id="categoryInput"
+        name="category"
+        th:value="${category}"
+      />
+      <input
+        type="hidden"
+        id="quizTimeInput"
+        name="quizTime"
+        th:value="${quizTime}"
       />
       <input type="hidden" id="questionsListInput" name="questionsList" />
       <input type="hidden" id="choicesListInput" name="choicesList" />

@@ -9,13 +9,25 @@
 }
 
 .container {
-  width: 30%;
+  width: 100%;
+  max-width: 600px;
   text-align: center;
   background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
   background: linear-gradient(to bottom, #0f9b0f, #000000);
   padding: 0px 50px 10px 50px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.input-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.label-input-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body {
@@ -41,11 +53,8 @@ label {
   margin-bottom: 30px;
 }
 
-.input-container {
-  display: grid;
-}
-
 input {
+  width: 100%;
   align-items: center;
   padding: 25px;
   margin-bottom: 25px;
