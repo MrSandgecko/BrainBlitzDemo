@@ -1,127 +1,125 @@
 body {
-    font-family: "Rocher";
-    text-align: center;
-    font-size: 50px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #000000;
-    background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
-    background: linear-gradient(to bottom, #0f9b0f, #000000);
-  }
-  
-  @font-face {
-    font-family: "Rocher";
-    src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
-  }
-  
-  @font-palette-values --Grays {
-    font-family: Rocher;
-    base-palette: 2;
-  }
-  
-  .main-container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; 
-    height: 100vh;
-    margin-top: 80px; 
-  }
-  
-  h1 {
-    margin: 0;
-  }
-  
-  .welcome {
-    font-palette: --Grays;
-    margin-bottom: 20px;
-  }
-  
-  .buttons-container {
-    display: grid;
-    gap: 40px;
-    text-align: center;
-    background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
-    background: linear-gradient(to bottom, #0f9b0f, #000000);
-    padding: 50px; 
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
-  }
-  
-  button {
-    --c: #;
-    box-shadow: 0 0 0 0.1em inset var(--c);
-    --_g: linear-gradient(#073b07 0 0) no-repeat;
-    background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
-      var(--_g) calc(200% - var(--_p, 0%)) 0%,
-      var(--_g) calc(var(--_p, 0%) - 100%) 100%,
-      var(--_g) calc(200% - var(--_p, 0%)) 100%;
-    background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
-    outline-offset: 0.1em;
-    transition: background-size 0.4s, background-position 0s 0.4s;
-    font-family: "Rocher";
-    font-size: 3.4rem;
-    color: aliceblue;
-    cursor: pointer;
-    padding: 0.1em 0.5em;
-    font-weight: bold;
-    border: none;
-    border-radius: 20px;
-  }
-  
-  button:first-child {
-      --c: #;
-      box-shadow: 0 0 0 0.1em inset var(--c);
-      --_g: linear-gradient(#169d16 0 0) no-repeat;
-      background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
-        var(--_g) calc(200% - var(--_p, 0%)) 0%,
-        var(--_g) calc(var(--_p, 0%) - 100%) 100%,
-        var(--_g) calc(200% - var(--_p, 0%)) 100%;
-      background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
-      outline-offset: 0.1em;
-      transition: background-size 0.4s, background-position 0s 0.4s;
-      font-family: "Rocher";
-      font-size: 3.4rem;
-      color: aliceblue;
-      cursor: pointer;
-      padding: 0.1em 0.5em;
-      font-weight: bold;
-      border: none;
-      border-radius: 20px;
-    }
-  
-  button:last-child {
-      --c: #;
-      box-shadow: 0 0 0 0.1em inset var(--c);
-      --_g: linear-gradient(#f44336 0 0) no-repeat;
-      background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
-        var(--_g) calc(200% - var(--_p, 0%)) 0%,
-        var(--_g) calc(var(--_p, 0%) - 100%) 100%,
-        var(--_g) calc(200% - var(--_p, 0%)) 100%;
-      background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
-      outline-offset: 0.1em;
-      transition: background-size 0.4s, background-position 0s 0.4s;
-      font-family: "Rocher";
-      font-size: 3.4rem;
-      color: aliceblue;
-      cursor: pointer;
-      padding: 0.1em 0.5em;
-      font-weight: bold;
-      border: none;
-      border-radius: 20px;
-    }
-  
-  button:hover {
-    --_p: 100%;
-    transition: background-position 0.4s, background-size 0s;
-  }
-  
-  button:active {
-    box-shadow: 0 0 9e9Q inset #0009;
-    background-color: var(--c);
-    color: #fff;
-  }
-  
+  font-family: "Rocher";
+  text-align: center;
+  font-size: 50px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+  background: linear-gradient(to bottom, #0f9b0f, #000000);
+}
+
+@font-face {
+  font-family: "Rocher";
+  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+}
+
+@font-palette-values --Grays {
+  font-family: Rocher;
+  base-palette: 2;
+}
+
+.main-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  margin-top: 80px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.welcome {
+  font-palette: --Grays;
+  margin-bottom: 20px;
+}
+
+.buttons-container {
+  display: grid;
+  gap: 40px;
+  text-align: center;
+  background: -webkit-linear-gradient(to bottom, #0f9b0f, #000000);
+  background: linear-gradient(to bottom, #0f9b0f, #000000);
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#073b07 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
+  font-family: "Rocher";
+  font-size: 3.4rem;
+  color: aliceblue;
+  cursor: pointer;
+  padding: 0.1em 0.5em;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+}
+
+button:first-child {
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#169d16 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
+  font-family: "Rocher";
+  font-size: 3.4rem;
+  color: aliceblue;
+  cursor: pointer;
+  padding: 0.1em 0.5em;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+}
+
+button:last-child {
+  --c: #;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(#f44336 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
+  font-family: "Rocher";
+  font-size: 3.4rem;
+  color: aliceblue;
+  cursor: pointer;
+  padding: 0.1em 0.5em;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+}
+
+button:hover {
+  --_p: 100%;
+  transition: background-position 0.4s, background-size 0s;
+}
+
+button:active {
+  box-shadow: 0 0 9e9Q inset #0009;
+  background-color: var(--c);
+  color: #fff;
+}
