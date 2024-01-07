@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="cache-control"
+      content="no-store, no-cache, must-revalidate"
+    />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <link rel="stylesheet" href="/playQuizStyle.css" />
+  </head>
+
+  <body>
+    <p th:text="${quiz.quizName}"></p>
+
+    <div th:each="question : ${questions}" class="container">
+      <h2 th:text="'Question ' + ${question.id}"></h2>
+      <p th:text="${question.question}"></p>
+
+      <!-- <div class="choices-container"> -->
+        <!-- <div th:each="choice : ${choicesMap[question.id]}">
+          <div th:utext="${#strings.toString(choice)}"></div>
+          <label th:text="${choice.choices}"></label>
+        </div>
+      </div> -->
+
+      <!-- Clear Button -->
+      <button
+        class="clear-button"
+        th:onclick="'clearQuestion(' + ${question.id} + ')'"
+        th:id="'clearButton-' + ${question.id}"
+      >
+        Clear
+      </button>
+    </div>
+
+    <!-- Submit Buttons -->
+    <button class="next-button" onclick="goNext()">Next</button>
+  </body>
+</html>

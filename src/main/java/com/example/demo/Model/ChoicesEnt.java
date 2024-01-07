@@ -23,10 +23,6 @@ public class ChoicesEnt {
 
     public void setChoices(String choices) {
         this.choices = choices;
-
     }
-
-   
-
 
 }

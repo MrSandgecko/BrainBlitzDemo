@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 
+import com.example.demo.Repository.QuizRep;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +41,8 @@ public class QuizEnt {
         return questions != null ? questions.size() : 0;
     }
 
+    
+
     public void setQuizTime(int quizTime) {
         this.quizTime = quizTime;
     }
@@ -53,4 +57,12 @@ public class QuizEnt {
 
     }
 
+    public Long getId(){
+        return this.id;
+    }
+
+    public String getQuizName() {
+        return this.quizName;
+    }
+    
 }

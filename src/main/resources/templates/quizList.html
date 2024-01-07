@@ -13,12 +13,16 @@
   </head>
   <body>
     <h1>Quizzes</h1>
-
-    <div th:each="quiz : ${quizzes}" class="container">
+    <div
+      th:each="quiz : ${quizzes}"
+      class="container"
+      th:attr="quizid=${quiz.id}"
+      th:quizid="${quiz.id}"
+      onclick="redirectToQuiz(this.getAttribute('quizid'))"
+      style="cursor: pointer"
+    >
       <div class="section">
-        <p
-          th:text="${quiz.getNumberOfQuestions()}"
-        ></p>
+        <p th:text="${quiz.getNumberOfQuestions()}"></p>
         <label for="">Questions</label>
       </div>
       <div class="seperator"></div>
@@ -37,5 +41,11 @@
         <!-- <p th:text="${quiz.creator}"></p> -->
       </div>
     </div>
+    <script>
+      function redirectToQuiz(quizId) {
+        console.log(quizId);
+        window.location.href = "/playQuizTab/" + quizId;
+      }
+    </script>
   </body>
 </html>
