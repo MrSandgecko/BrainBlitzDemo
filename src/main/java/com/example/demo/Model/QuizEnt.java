@@ -32,7 +32,7 @@ public class QuizEnt {
         this.quizName = quizName;
     }
 
-    public void setCategory(String category){
+    public void setCategory(String category) {
 
         this.category = category;
     }
@@ -41,28 +41,26 @@ public class QuizEnt {
         return questions != null ? questions.size() : 0;
     }
 
-    
-
     public void setQuizTime(int quizTime) {
         this.quizTime = quizTime;
     }
 
-    public int getQuizTime(){
+    public int getQuizTime() {
         return this.quizTime;
 
     }
 
-    public String getQuizCategory(){
+    public String getQuizCategory() {
         return this.category;
 
     }
 
-    public Long getId(){
+    public Long getId() {
         return this.id;
     }
 
     public String getQuizName() {
         return this.quizName;
     }
-    
+
 }

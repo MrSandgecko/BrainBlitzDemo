@@ -4,12 +4,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Model.StudentsEnt;
+
 import com.example.demo.Model.TeachersEnt;
 import com.example.demo.Repository.TeachersRep;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 
 @Service
 public class TeachersService {

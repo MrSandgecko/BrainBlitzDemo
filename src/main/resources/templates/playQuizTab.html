@@ -12,31 +12,102 @@
     <link rel="stylesheet" href="/playQuizStyle.css" />
   </head>
 
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Salsa&display=swap");
+  </style>
+
   <body>
-    <p th:text="${quiz.quizName}"></p>
-
-    <div th:each="question : ${questions}" class="container">
-      <h2 th:text="'Question ' + ${question.id}"></h2>
-      <p th:text="${question.question}"></p>
-
-      <!-- <div class="choices-container"> -->
-        <!-- <div th:each="choice : ${choicesMap[question.id]}">
-          <div th:utext="${#strings.toString(choice)}"></div>
-          <label th:text="${choice.choices}"></label>
-        </div>
-      </div> -->
-
-      <!-- Clear Button -->
-      <button
-        class="clear-button"
-        th:onclick="'clearQuestion(' + ${question.id} + ')'"
-        th:id="'clearButton-' + ${question.id}"
-      >
-        Clear
-      </button>
+    <div class="question-header-container">
+      <h2 id="questionNumber" th:text="'Question ' + ${questions[0].id} "></h2>
     </div>
 
-    <!-- Submit Buttons -->
-    <button class="next-button" onclick="goNext()">Next</button>
+    <div th:each="question, stat : ${questions}" class="container">
+      <div class="question-content">
+        <p th:text="${question.question + '?'}" id="questionText"></p>
+      </div>
+
+      <div class="choices-container">
+        <div th:each="choice, choiceIndex : ${choicesMap[question.id]}">
+          <label
+            th:text="${choice.choices}"
+            th:onclick="'selectChoice(' + ${choiceIndex.index} + ')'"
+          ></label>
+        </div>
+      </div>
+
+      <button
+        class="next-button"
+        disabled
+        th:if="${!stat.last}"
+        th:onclick="'showQuestion(' + ${choiceIndex.index + 1} + ')'"
+        th:text="'Next'"
+      ></button>
+    </div>
+
+    <script>
+      let currentQuestion = 0;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        showQuestion(currentQuestion);
+      });
+
+      function showQuestion(index) {
+        const questions = document.querySelectorAll(".container");
+
+        if (index >= 0 && index < questions.length) {
+          const selectedChoice = document.querySelector(
+            ".choices-container label.selected"
+          );
+          if (!selectedChoice && index !== 0) {
+            return;
+          }
+
+          questions.forEach((question, i) => {
+            question.style.display = i === index ? "block" : "none";
+          });
+          currentQuestion = index;
+
+          const questionNumberElement =
+            document.getElementById("questionNumber");
+          if (questionNumberElement) {
+            questionNumberElement.innerText =
+              "Question " + (currentQuestion + 1);
+          }
+
+          const choices = document.querySelectorAll(".choices-container label");
+          choices.forEach((choice, choiceIndex) => {
+            choice.onclick = function () {
+              selectChoice(choiceIndex);
+            };
+          });
+
+          const nextButton = document.querySelector(".next-button");
+          if (document.querySelector(".choices-container label.selected")) {
+            nextButton.removeAttribute("disabled");
+          } else {
+            nextButton.setAttribute("disabled", "true");
+          }
+        }
+      }
+
+      function selectChoice(choiceIndex) {
+        const choices = document.querySelectorAll(".choices-container label");
+
+        choices.forEach((choice, index) => {
+          if (index === choiceIndex) {
+            choice.classList.toggle("selected");
+          } else {
+            choice.classList.remove("selected");
+          }
+        });
+
+        const nextButton = document.querySelector(".next-button");
+        if (document.querySelector(".choices-container label.selected")) {
+          nextButton.removeAttribute("disabled");
+        } else {
+          nextButton.setAttribute("disabled", "true");
+        }
+      }
+    </script>
   </body>
 </html>

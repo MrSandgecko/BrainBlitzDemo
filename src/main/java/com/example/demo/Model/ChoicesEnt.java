@@ -25,4 +25,8 @@ public class ChoicesEnt {
         this.choices = choices;
     }
 
+    public String getChoices(){
+        return this.choices;
+    }
+
 }

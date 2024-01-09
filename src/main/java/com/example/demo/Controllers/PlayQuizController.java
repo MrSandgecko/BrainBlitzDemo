@@ -38,22 +38,49 @@ public class PlayQuizController {
 
     QuizEnt quiz = quizService.getQuizById(quizId);
 
-    List<QuestionsEnt> questions = questionService.getQuestionsByQuizId(quizId);
+    List<QuestionsEnt> questionsList = questionService.getQuestionsByQuizId(quizId);
+    List<QuestionsEnt> modifiedQuestionsList = modifyQuestions(questionsList);
 
-    Map<Long, List<ChoicesEnt>> choicesMap = new HashMap<>();
+    Map<Long, List<ChoicesEnt>> modifiedChoicesMap = new HashMap<>();
 
-    for (QuestionsEnt question : questions) {
+    for (QuestionsEnt question : modifiedQuestionsList) {
       List<ChoicesEnt> choicesList = choicesService.getChoicesByQuestionId(question.getId());
-      choicesMap.put(question.getId(), choicesList);
-      System.out.println(choicesMap);
+      List<ChoicesEnt> modifiedChoicesList = modifyChoices(choicesList);
+      modifiedChoicesMap.put(question.getId(), modifiedChoicesList);
+      System.out.println(modifiedChoicesMap);
 
     }
 
     model.addAttribute("quiz", quiz);
-    model.addAttribute("questions", questions);
-    model.addAttribute("choicesMap", choicesMap);
+    model.addAttribute("questions", modifiedQuestionsList);
+    model.addAttribute("choicesMap", modifiedChoicesMap);
 
     return "playQuizTab";
+  }
+
+  private List<ChoicesEnt> modifyChoices(List<ChoicesEnt> choicesList) {
+    for (ChoicesEnt choice : choicesList) {
+      String modifiedChoiceText = modifyChoiceText(choice.getChoices());
+      choice.setChoices(modifiedChoiceText);
+    }
+    return choicesList;
+  }
+
+  private String modifyChoiceText(String originalChoiceText) {
+    return originalChoiceText.replace("[", "").replace("]", "");
+  }
+
+
+   private List<QuestionsEnt> modifyQuestions(List<QuestionsEnt> questionsist) {
+    for (QuestionsEnt question : questionsist) {
+      String modifiedQuestionsText = modifyQuestionText(question.getQuestion());
+      question.setQuestion(modifiedQuestionsText);
+    }
+    return questionsist;
+  }
+
+  private String modifyQuestionText(String originalChoiceText) {
+    return originalChoiceText.replace("[", "").replace("]", "").replace("\"", "");
   }
 
 }
